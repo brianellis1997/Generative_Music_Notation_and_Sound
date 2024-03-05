@@ -21,8 +21,6 @@ n_pieces = int(sys.argv[3]) if len(sys.argv) > 3 else 20
 config = yaml.load(open(config_path, 'r'), Loader=yaml.FullLoader)
 ckpt_dir = config['output']['ckpt_dir']
 
-max_bars = 128
-temp = 1.2
 top_p = 0.97
 max_dec_len = 2400
 print ('[nucleus parameters] t = {}, p = {}'.format(temp, top_p))
@@ -83,11 +81,17 @@ def get_leadsheet_prompt(data_dir, piece, prompt_n_bars):
 
   return prompt_evs, target_bars
 
+def user_input():
+    max_bars = int(input('Please input max bars: '))
+    temp = float(input('Please input temperature (randomness): '))
+    return (max_bars, temp)
+
 
 if __name__ == '__main__':
   if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 
+  max_bars, temp = user_input()
   event2idx, idx2event, vocab_size = \
     read_vocab(config['data']['vocab_path'])
 
