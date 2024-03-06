@@ -2,14 +2,14 @@ import sys
 import os
 import random
 import pickle
-sys.path.append('./model/')
+# sys.path.append('./model/')
 sys.path.append('./')
 
 import yaml
 import torch
 import numpy as np
 
-from model.plain_transformer import PlainTransformer
+from plain_transformer import PlainTransformer
 from convert2midi import skyline_event_to_midi, TempoEvent
 from utils import pickle_load
 from inference_utils import generate_plain_xl
